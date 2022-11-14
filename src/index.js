@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const formData = document.getElementsByClassName("input-text");
     const toyName = formData[0].value;
     const toyURL = formData[1].value;
-    fetchPostToy(toyName, toyURL)
+    fetchPostToy(toyName, toyURL);
   })
 });
 
@@ -53,6 +53,7 @@ function fetchPostToy(toyName, toyURL) {
   .then(data => createElement(data))
 }
 
+// UPDATE NUMBER OF LIKES WITH LIKE BUTTON
 function fetchPatchLikes(e) {
   const id = e.target.id;
   const likeContainer = e.target.previousElementSibling;
