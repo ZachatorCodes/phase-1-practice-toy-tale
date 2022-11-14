@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const toyName = formData[0].value;
     const toyURL = formData[1].value;
     fetchPostToy(toyName, toyURL);
+    document.querySelector(".add-toy-form").reset();
   })
 });
 
