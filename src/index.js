@@ -53,6 +53,27 @@ function fetchPostToy(toyName, toyURL) {
   .then(data => createElement(data))
 }
 
+function fetchPatchLikes(e) {
+  const id = e.target.id;
+  const likeContainer = e.target.previousElementSibling;
+  const numLikes = parseInt(likeContainer.textContent.split(" ")[0]);
+  const newLikes = numLikes + 1;
+  fetch(`http://localhost:3000/toys/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify({
+      "likes": newLikes
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    likeContainer.textContent = `${data.likes} likes`;
+  })
+}
+
 // CREATE CARD ELEMENT
 function createElement(toy) {
   const cardStorage = document.getElementById("toy-collection");
@@ -62,6 +83,7 @@ function createElement(toy) {
   const img = document.createElement("img");
   const p = document.createElement("p");
   const button = document.createElement("button");
+  button.addEventListener("click", fetchPatchLikes);
   for (const key in toy) {
     if (key === "name") {
       h2.textContent = toy[key];
